@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { toggleLayout } from "@/slices/layoutSlice";
 
 const CatWrapper = styled.figure`
   height: 500px;
@@ -10,6 +12,7 @@ const CatWrapper = styled.figure`
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 `;
 
 const CatImg = styled.img`
@@ -45,8 +48,9 @@ const CatsProf = styled.span`
   color: #4d4d4d;
 `;
 const CatProfile = () => {
+  const dispatch = useDispatch();
   return (
-    <CatWrapper>
+    <CatWrapper onClick={() => dispatch(toggleLayout())}>
       <CatImg />
 
       <CatBio>

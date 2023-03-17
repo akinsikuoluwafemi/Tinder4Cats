@@ -4,15 +4,7 @@ import { FcLike } from "react-icons/fc";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import { BsFillStarFill } from "react-icons/bs";
 import styled from "styled-components";
-
-type IconProps = {
-  width: string;
-  height: string;
-  color: string;
-  size: string;
-  rotate?: string;
-  background?: string;
-};
+import { IconDimensions, IconProps } from "../../types/globalTypes";
 
 const IconWrapper = styled.span<IconProps>`
   width: ${({ width }) => width};
@@ -34,26 +26,36 @@ const IconWrapper = styled.span<IconProps>`
   }
 `;
 
-export const Cancel = () => {
+export const Cancel = ({
+  size = "35px",
+  width = "70px",
+  height = "70px",
+  hasBg,
+}: IconDimensions) => {
   return (
     <IconWrapper
-      width="70px"
-      height="70px"
-      color="hsla(10, 100%, 60%, 1)"
-      size="35px"
+      width={width}
+      height={height}
+      color={hasBg ? "#fff" : "hsla(0, 100%, 50%, 1)"}
+      size={size}
+      background={hasBg ? "red" : "#fff"}
     >
       <FaTimes />
     </IconWrapper>
   );
 };
 
-export const Back = () => {
+export const Back = ({
+  size = "25px",
+  width = "47px",
+  height = "47px",
+}: IconDimensions) => {
   return (
     <IconWrapper
-      width="47px"
-      height="47px"
+      width={width}
+      height={height}
       color="hsla(45, 100%, 50%, 1)"
-      size="25px"
+      size={size}
       rotate="180deg"
     >
       <MdRefresh />
@@ -61,26 +63,38 @@ export const Back = () => {
   );
 };
 
-export const SuperLike = () => {
+export const SuperLike = ({
+  size = "35px",
+  width = "70px",
+  height = "70px",
+  hasBg,
+}: IconDimensions) => {
   return (
     <IconWrapper
-      width="70px"
-      height="70px"
-      color="hsla(170, 100%, 45%, 1)"
-      size="35px"
+      width={width}
+      height={height}
+      color={hasBg ? "#fff" : "hsla(45, 100%, 50%, 1)"}
+      size={size}
+      background={hasBg ? "hsla(45, 100%, 50%, 1)" : "#fff"}
     >
       <BsFillSuitHeartFill />
     </IconWrapper>
   );
 };
 
-export const Favorite = () => {
+export const Favorite = ({
+  size = "25px",
+  width = "47px",
+  height = "47px",
+  hasBg,
+}: IconDimensions) => {
   return (
     <IconWrapper
-      width="47px"
-      height="47px"
-      color="hsla(200, 100%, 50%, 1)"
-      size="25px"
+      width={width}
+      height={height}
+      color={hasBg ? "#fff" : "hsla(200, 100%, 50%, 1)"}
+      size={size}
+      background={hasBg ? "hsla(200, 100%, 50%, 1)" : "#fff"}
     >
       <BsFillStarFill />
     </IconWrapper>
