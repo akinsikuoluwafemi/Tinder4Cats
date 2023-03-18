@@ -1,8 +1,10 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import { SetStateAction, useState } from "react";
-import styled from "styled-components";
-import { MdLogin, MdLogout } from "react-icons/md";
+import { NextPage } from 'next';
+import Head from 'next/head';
+import { SetStateAction, useState } from 'react';
+import styled from 'styled-components';
+import { MdLogin, MdLogout } from 'react-icons/md';
+import Link from 'next/link';
+import { Favorite } from '@/components/Icons';
 
 const Container = styled.section`
   min-height: 100vh;
@@ -22,32 +24,53 @@ const Header = styled.header<{ show: boolean }>`
   width: 100%;
   height: 70px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  display: ${({ show }) => (show ? "flex" : "none")};
-  justify-content: space-around;
-  align-items: center;
+  display: ${({ show }) => (show ? 'flex' : 'none')};
+
   color: #444;
-  // padding: 0 20px;
+  padding: 0 20px;
 
-  span:first-of-type {
-    font-size: 18px;
-    font-weight: 400;
-    cursor: pointer;
-  }
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
-  span:last-of-type {
-    font-size: 25px;
-    color: green; //red
-    cursor: pointer;
+    li:first-of-type {
+      font-size: 18px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    li:last-of-type {
+      font-size: 18px;
+      // color: green; //red
+      cursor: pointer;
+      padding-left: 20px;
+    }
   }
 `;
 
-const TextHeader = styled.h2`
+const TextHeader = styled.li`
+  margin-right: auto;
   text-align: center;
-  font-weight: 500;
   background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
+  list-style-type: none !important;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    font-weight: 800;
+    font-size: 25px;
+
+    @media (max-width: 768px) {
+      font-size: 19px;
+    }
+  }
 `;
 
 type LayoutProps = {
@@ -58,7 +81,7 @@ type LayoutProps = {
 
 const MainLayout: NextPage<LayoutProps> = ({
   children,
-  title = "Tinder for cats",
+  title = 'Tinder for cats',
   showHeader = true,
 }) => {
   return (
@@ -72,12 +95,19 @@ const MainLayout: NextPage<LayoutProps> = ({
 
       <Container>
         <Header show={showHeader}>
-          <TextHeader> Tinder for Cats</TextHeader>
+          <ul>
+            <TextHeader>
+              <Link href="/">Tinder for Cats</Link>
+            </TextHeader>
 
-          <span>Favorites</span>
-          <span>
-            <MdLogin />
-          </span>
+            <li>
+              <Link href="/favorites">Favorites</Link>
+            </li>
+
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
+          </ul>
         </Header>
 
         {children}

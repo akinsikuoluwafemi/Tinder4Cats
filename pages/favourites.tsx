@@ -1,7 +1,8 @@
-import React from "react";
+import MainLayout from '@/layouts/mainLayout';
+import React from 'react';
 
 const Favourites = () => {
-  return <div>Favourites</div>;
+  return <MainLayout>Favourites</MainLayout>;
 };
 
 export default Favourites;

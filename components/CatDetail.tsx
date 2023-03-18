@@ -1,18 +1,24 @@
-import { toggleLayout } from "@/slices/layoutSlice";
-import React from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { Cancel, Favorite, SuperLike } from "./Icons";
+import { toggleLayout } from '@/slices/layoutSlice';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { Cancel, Favorite, SuperLike } from './Icons';
+import {
+  selectRandomBreedId,
+  selectRandomBreed,
+  selectCatBreed,
+  selectRandomCat,
+} from '@/slices/catDataSlice';
 
 const CatDetailWrapper = styled.section`
   background: white;
   height: 100vh;
   display: flex;
-  flex-direction: column; ;
+  flex-direction: column;
 `;
 
-const DetailPhoto = styled.div`
-  background-image: url("https://cdn2.thecatapi.com/images/ao2.jpg");
+const DetailPhoto = styled.div<{ bg: string }>`
+  background-image: url(${({ bg }) => bg});
   background-size: cover;
   background-position: center;
   height: 450px;
@@ -38,6 +44,7 @@ const DetailBio = styled.div`
   span:nth-child(2) {
     font-size: 17px;
     font-weight: 400;
+    flex-wrap: wrap;
 
     color: #222;
   }
@@ -54,7 +61,7 @@ const DetailActionWrapper = styled.div`
 
   p {
     color: #4d4d4d;
-    font-family: "Nunito", sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
 `;
 
@@ -68,23 +75,37 @@ const ActionDetailWrapper = styled.div`
 
 const CatDetail = () => {
   const dispatch = useDispatch();
+  // const randomBreedId = useSelector(selectRandomBreedId);
+  // const catBreed = useSelector(selectCatBreed);
+
+  // const randomBreed = useSelector(selectRandomBreed);
+
+  // console.log(Object.values(catBreed[randomBreedId])[0].id);
+
+  const newCat = useSelector(selectRandomCat);
+
   return (
     <CatDetailWrapper>
-      <DetailPhoto onClick={() => dispatch(toggleLayout())} />
+      <DetailPhoto
+        bg={newCat[0].url}
+        onClick={() => dispatch(toggleLayout())}
+      />
 
       <DetailBio>
-        <span>Bean, 4</span>
+        <span>{newCat[0].breeds[0].name}</span>
 
-        <span>Nurse</span>
+        <span>
+          <span style={{ fontWeight: '400', fontSize: '17px' }}>
+            Temperament
+          </span>
+          : {newCat[0].breeds[0].temperament}
+        </span>
 
-        <span>715 kilometers away</span>
+        <span>Life Span: {newCat[0].breeds[0].life_span} years</span>
       </DetailBio>
 
       <DetailActionWrapper>
-        <p>
-          Wine enthusiast. 🧟 Zombie evangelist. Extreme 🍻 beeraholic. Tv
-          specialist. Food junkie. Total writer.
-        </p>
+        <p>{newCat[0].breeds[0].description}</p>
 
         <ActionDetailWrapper>
           <Cancel hasBg={true} width="90px" height="90px" size="55px" />

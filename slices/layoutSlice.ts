@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface LayoutState {
   isLayoutActive: boolean;
@@ -10,7 +10,7 @@ const initialState: LayoutState = {
 };
 
 const useSlice = createSlice({
-  name: "layout",
+  name: 'layout',
   initialState,
   reducers: {
     toggleLayout: (state) => {
