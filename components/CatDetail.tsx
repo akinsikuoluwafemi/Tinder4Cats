@@ -8,7 +8,10 @@ import {
   selectRandomBreed,
   selectCatBreed,
   selectRandomCat,
+  selectCatLoading,
 } from '@/slices/catDataSlice';
+import useCats from '@/hooks/useCats';
+import { LoadingIndicator } from '@/utils/styles';
 
 const CatDetailWrapper = styled.section`
   background: white;
@@ -85,9 +88,12 @@ const CatDetail = () => {
   // console.log(Object.values(catBreed[randomBreedId])[0].id);
 
   const newCat = useSelector(selectRandomCat);
+  const loading = useSelector(selectCatLoading);
+  const { callCat } = useCats();
 
   return (
     <CatDetailWrapper>
+      {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
       <DetailPhoto
         bg={newCat[0].url}
         onClick={() => dispatch(toggleLayout())}
@@ -110,9 +116,25 @@ const CatDetail = () => {
         <p>{newCat[0].breeds[0].description}</p>
 
         <ActionDetailWrapper>
-          <Cancel hasBg={true} width="90px" height="90px" size="55px" />
-          <SuperLike hasBg={true} width="90px" height="90px" size="55px" />
-          <Favorite hasBg={true} width="90px" height="90px" size="55px" />
+          <span
+            onClick={() => {
+              callCat();
+              dispatch(toggleLayout());
+            }}
+          >
+            <Cancel hasBg={true} width="90px" height="90px" size="55px" />
+          </span>
+          <span
+            onClick={() => {
+              callCat();
+              dispatch(toggleLayout());
+            }}
+          >
+            <SuperLike hasBg={true} width="90px" height="90px" size="55px" />
+          </span>
+          <span>
+            <Favorite hasBg={true} width="90px" height="90px" size="55px" />
+          </span>
         </ActionDetailWrapper>
       </DetailActionWrapper>
     </CatDetailWrapper>

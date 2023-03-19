@@ -10,14 +10,6 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const  { API_KEY, API_ENDPOINT } = useEnvVars();
-
-// const url = https://api.thecatapi.com/v1/images/search?limit=1&breed_ids=beng&api_key=live_f93xV39EEX3VvT72oZLAERkqKUGReJUR69zRe61BusTqO0vogbte4SCoGpj4mQkL
-
-// const url = `${API_ENDPOINT}/images/search?limit=1&breed_ids=beng&api_key=${API_KEY}`;
-
-// const allbreedsUrl = `${API_ENDPOINT}/v1/breeds/`;
-
 const initialState: CatDataState = {
   breeds: {},
   randomBreed: {},

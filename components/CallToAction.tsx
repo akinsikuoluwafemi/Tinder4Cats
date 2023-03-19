@@ -1,3 +1,4 @@
+import useCats from '@/hooks/useCats';
 import {
   getRandomCat,
   selectCatBreed,
@@ -24,39 +25,23 @@ const ActionWrapper = styled.div`
 `;
 
 const CallToAction = () => {
-  const { API_ENDPOINT, API_KEY } = useEnvVars();
-  const dispatch = useDispatch();
+  // const { API_ENDPOINT, API_KEY } = useEnvVars();
+  const { callCat } = useCats();
+  // const dispatch = useDispatch();
 
-  const randomBreedId = useSelector(selectRandomBreedId);
-  const catBreed = useSelector(selectCatBreed);
-  const randomBreed = useSelector(selectRandomBreed);
-
-  const callCat = () => {
-    const randomCatBreedId = rand_breed(catBreed);
-    const breed_id: string = Object.values(catBreed[randomCatBreedId])[0].id;
-    console.log(breed_id);
-    dispatch(setRandomBreedId(randomCatBreedId));
-    const randomCatBreed = catBreed[randomCatBreedId];
-    catBreed && dispatch(setRandomBreed(randomCatBreed));
-
-    dispatch(
-      getRandomCat({
-        endpoint: API_ENDPOINT,
-        breed_id,
-        api_key: API_KEY,
-      }) as any,
-    );
-  };
+  // const randomBreedId = useSelector(selectRandomBreedId);
+  // const catBreed = useSelector(selectCatBreed);
+  // const randomBreed = useSelector(selectRandomBreed);
 
   return (
     <ActionWrapper>
       <span onClick={callCat}>
         <Back />
       </span>
-      <span>
+      <span onClick={callCat}>
         <Cancel />
       </span>
-      <span>
+      <span onClick={callCat}>
         <SuperLike />
       </span>
       <span>

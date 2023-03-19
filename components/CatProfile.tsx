@@ -2,7 +2,8 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLayout } from '@/slices/layoutSlice';
-import { selectRandomCat } from '@/slices/catDataSlice';
+import { selectCatLoading, selectRandomCat } from '@/slices/catDataSlice';
+import { LoadingIndicator } from '@/utils/styles';
 
 const CatWrapper = styled.figure`
   height: 500px;
@@ -71,16 +72,18 @@ const CatsProf = styled.span`
 `;
 const CatProfile = () => {
   const newCat = useSelector(selectRandomCat);
-  console.log(newCat[0].url);
+  // console.log(newCat[0].url);
+  const loading = useSelector(selectCatLoading);
 
   const dispatch = useDispatch();
   return (
     <CatWrapper onClick={() => dispatch(toggleLayout())}>
-      <CatImg bg={newCat[0].url} />
+      {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
+      <CatImg bg={newCat[0]?.url} />
 
       <CatBio>
-        <CatsName>{newCat[0].breeds[0].name}</CatsName>
-        <CatsProf>Origin: {newCat[0].breeds[0].origin}</CatsProf>
+        <CatsName>{newCat[0]?.breeds[0].name}</CatsName>
+        <CatsProf>Origin: {newCat[0]?.breeds[0].origin}</CatsProf>
       </CatBio>
     </CatWrapper>
   );
