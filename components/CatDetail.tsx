@@ -21,7 +21,9 @@ const DetailPhoto = styled.div<{ bg: string }>`
   background-image: url(${({ bg }) => bg});
   background-size: cover;
   background-position: center;
-  height: 450px;
+  height: 480px;
+  // background: red;
+  background-repeat: no-repeat;
   width: 100%;
   flex: 0.7;
   cursor: pointer;
@@ -56,7 +58,7 @@ const DetailBio = styled.div`
   }
 `;
 const DetailActionWrapper = styled.div`
-  flex: 0.3;
+  flex: 0.2;
   padding: 20px 10px;
 
   p {
