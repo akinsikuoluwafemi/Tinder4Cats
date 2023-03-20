@@ -1,5 +1,5 @@
 import { toggleLayout } from '@/slices/layoutSlice';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Cancel, Favorite, SuperLike } from './Icons';
@@ -12,6 +12,8 @@ import {
 } from '@/slices/catDataSlice';
 import useCats from '@/hooks/useCats';
 import { LoadingIndicator } from '@/utils/styles';
+import useFavorites from '@/hooks/useFavorites';
+import { useRouter } from 'next/router';
 
 const CatDetailWrapper = styled.section`
   background: white;
@@ -23,7 +25,7 @@ const CatDetailWrapper = styled.section`
 const DetailPhoto = styled.div<{ bg: string }>`
   background-image: url(${({ bg }) => bg});
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   height: 480px;
   // background: red;
   background-repeat: no-repeat;
@@ -80,16 +82,23 @@ const ActionDetailWrapper = styled.div`
 
 const CatDetail = () => {
   const dispatch = useDispatch();
-  // const randomBreedId = useSelector(selectRandomBreedId);
-  // const catBreed = useSelector(selectCatBreed);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
-  // const randomBreed = useSelector(selectRandomBreed);
-
-  // console.log(Object.values(catBreed[randomBreedId])[0].id);
+  useEffect(() => {
+    const tokenStr =
+      typeof window !== 'undefined' && localStorage.getItem('tokenstr');
+    if (tokenStr) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
 
   const newCat = useSelector(selectRandomCat);
   const loading = useSelector(selectCatLoading);
   const { callCat } = useCats();
+  const { addToFavorites } = useFavorites();
 
   return (
     <CatDetailWrapper>
@@ -132,7 +141,18 @@ const CatDetail = () => {
           >
             <SuperLike hasBg={true} width="90px" height="90px" size="55px" />
           </span>
-          <span>
+          <span
+            onClick={() => {
+              if (loggedIn) {
+                addToFavorites();
+                dispatch(toggleLayout());
+              } else {
+                alert('Please login to add to favorites');
+                router.push('/login');
+                dispatch(toggleLayout());
+              }
+            }}
+          >
             <Favorite hasBg={true} width="90px" height="90px" size="55px" />
           </span>
         </ActionDetailWrapper>

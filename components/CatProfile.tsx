@@ -39,7 +39,7 @@ const CatImg = styled.img<{ bg: string }>`
   flex: 0.9;
   background-image: url(${({ bg }) => bg});
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   // transform: translateX(-50%);
@@ -72,7 +72,6 @@ const CatsProf = styled.span`
 `;
 const CatProfile = () => {
   const newCat = useSelector(selectRandomCat);
-  // console.log(newCat[0].url);
   const loading = useSelector(selectCatLoading);
 
   const dispatch = useDispatch();

@@ -16,16 +16,17 @@ const loginHandler: NextApiHandler = async (
       });
 
       if (!user || !bcrypt.compareSync(password, user.password)) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+        return res
+          .status(401)
+          .json({ message: 'Invalid email or password', success: false });
       }
       const token = jwt.sign(
         { id: user.id, email: user.email, username: user.username },
         process.env.JWT_SECRET as string,
       );
-      // const favorites = await prisma.favorite.findMany();
-      // console.log(favorites);
+
       res.status(200).json({
-        id: user.id,
+        user,
         token,
         message: 'Login successful',
         success: true,

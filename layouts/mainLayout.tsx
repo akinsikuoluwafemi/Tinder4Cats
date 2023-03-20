@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MdLogin, MdLogout } from 'react-icons/md';
 import Link from 'next/link';
@@ -84,6 +84,17 @@ const MainLayout: NextPage<LayoutProps> = ({
   title = 'Tinder for cats',
   showHeader = true,
 }) => {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const tokenStr =
+      typeof window !== 'undefined' && localStorage.getItem('tokenstr');
+    if (tokenStr) {
+      const token = JSON.parse(tokenStr);
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -104,9 +115,15 @@ const MainLayout: NextPage<LayoutProps> = ({
               <Link href="/favorites">Favorites</Link>
             </li>
 
-            <li>
-              <Link href="/login">Login</Link>
-            </li>
+            {loggedIn ? (
+              <li>
+                <Link href="/logout">Logout</Link>
+              </li>
+            ) : (
+              <li>
+                <Link href="/login">Login</Link>
+              </li>
+            )}
           </ul>
         </Header>
 

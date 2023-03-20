@@ -23,9 +23,11 @@ const signupHandler: NextApiHandler = async (
         },
       });
 
-      res.json({ message: 'User created successfully', success: true });
+      res
+        .status(201)
+        .json({ message: 'User created successfully', success: true });
     } catch (e) {
-      res.json({ message: 'User already exists', success: false });
+      res.status(409).json({ message: 'User already exists', success: false });
     }
   }
 };

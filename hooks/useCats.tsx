@@ -17,7 +17,6 @@ const useCats = () => {
   const callCat = () => {
     const randomCatBreedId = rand_breed(catBreed);
     const breed_id: string = Object.values(catBreed[randomCatBreedId])[0].id;
-    console.log(breed_id);
     dispatch(setRandomBreedId(randomCatBreedId));
     const randomCatBreed = catBreed[randomCatBreedId];
     catBreed && dispatch(setRandomBreed(randomCatBreed));

@@ -1,5 +1,5 @@
 import MainLayout from '@/layouts/mainLayout';
-import React from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -8,6 +8,9 @@ import { UserSubmitForm } from '@/types/globalTypes';
 import { validationSchema } from '@/utils/validators';
 import TextField from '@/components/TextField';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { registerUser } from '@/slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 const FormTitle = styled.h1`
   text-align: center;
@@ -91,8 +94,34 @@ const Signup = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: UserSubmitForm) => {
-    console.log(JSON.stringify(data, null, 2));
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tokenStr =
+      typeof window !== 'undefined' && localStorage.getItem('tokenstr');
+    if (tokenStr) {
+      router.push('/');
+    }
+  }, [router]);
+
+  const onSubmit = async (data: UserSubmitForm) => {
+    try {
+      const user = {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+      };
+
+      const response = await dispatch(registerUser(user) as any);
+      if (response.payload.success === true) {
+        alert(response.payload.message);
+        router.push('/login');
+      }
+    } catch (err: any) {
+      alert(err.message);
+      console.log(err);
+    }
 
     reset();
   };

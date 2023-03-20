@@ -1,8 +1,22 @@
+export interface UserDataState {
+  user: User;
+  token: string;
+  loading: boolean;
+  error: string | null | { message: ''; success: false };
+}
+
 export interface User {
   id: string;
   email: string;
   password: string;
+  username: string;
+}
+
+export interface UserResponse {
+  user?: User;
   token?: string;
+  message: string;
+  success: boolean;
 }
 
 export type IconProps = {

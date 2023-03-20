@@ -1,16 +1,22 @@
 import useCats from '@/hooks/useCats';
+import useFavorites from '@/hooks/useFavorites';
 import {
   getRandomCat,
   selectCatBreed,
   selectRandomBreed,
   selectRandomBreedId,
+  selectRandomCat,
   setRandomBreed,
   setRandomBreedId,
 } from '@/slices/catDataSlice';
+import { selectUser } from '@/slices/userSlice';
+import { User } from '@/types/globalTypes';
 import { rand_breed } from '@/utils/randomBreed';
 import { useEnvVars } from '@/utils/useEnvVars';
 import { PayloadAction } from '@reduxjs/toolkit';
-import React from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Back, Cancel, Favorite, SuperLike } from './Icons';
@@ -25,13 +31,32 @@ const ActionWrapper = styled.div`
 `;
 
 const CallToAction = () => {
-  // const { API_ENDPOINT, API_KEY } = useEnvVars();
-  const { callCat } = useCats();
-  // const dispatch = useDispatch();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
+  const router = useRouter();
 
-  // const randomBreedId = useSelector(selectRandomBreedId);
-  // const catBreed = useSelector(selectCatBreed);
-  // const randomBreed = useSelector(selectRandomBreed);
+  const user: User = useSelector(selectUser);
+  const cat = useSelector(selectRandomCat);
+  console.log(cat);
+
+  console.log(user);
+
+  useEffect(() => {
+    const tokenStr =
+      typeof window !== 'undefined' && localStorage.getItem('tokenstr');
+    if (tokenStr) {
+      setLoggedIn(true);
+      const tkn = JSON.parse(tokenStr);
+      setToken(tkn);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+  console.log(token);
+  const { API_ENDPOINT, API_KEY } = useEnvVars();
+  const { callCat } = useCats();
+
+  const { addToFavorites } = useFavorites();
 
   return (
     <ActionWrapper>
@@ -44,7 +69,16 @@ const CallToAction = () => {
       <span onClick={callCat}>
         <SuperLike />
       </span>
-      <span>
+      <span
+        onClick={() => {
+          if (loggedIn) {
+            addToFavorites();
+          } else {
+            alert('Please login to add to favorites');
+            router.push('/login');
+          }
+        }}
+      >
         <Favorite />
       </span>
     </ActionWrapper>
