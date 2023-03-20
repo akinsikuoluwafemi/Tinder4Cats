@@ -1,33 +1,23 @@
 import useCats from '@/hooks/useCats';
 import useFavorites from '@/hooks/useFavorites';
-import {
-  getRandomCat,
-  selectCatBreed,
-  selectRandomBreed,
-  selectRandomBreedId,
-  selectRandomCat,
-  setRandomBreed,
-  setRandomBreedId,
-} from '@/slices/catDataSlice';
+import { selectRandomCat } from '@/slices/catDataSlice';
 import { selectUser } from '@/slices/userSlice';
 import { User } from '@/types/globalTypes';
-import { rand_breed } from '@/utils/randomBreed';
 import { useEnvVars } from '@/utils/useEnvVars';
 import { PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Back, Cancel, Favorite, SuperLike } from './Icons';
 
 const ActionWrapper = styled.div`
   height: 150px;
   width: 100%;
+  margin-top: 40px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding-bottom: 40px;
 `;
 
 const CallToAction = () => {
@@ -52,8 +42,6 @@ const CallToAction = () => {
       setLoggedIn(false);
     }
   }, []);
-  console.log(token);
-  const { API_ENDPOINT, API_KEY } = useEnvVars();
   const { callCat } = useCats();
 
   const { addToFavorites } = useFavorites();

@@ -59,11 +59,21 @@ export interface Cat {
   height: number;
 }
 
+export interface favoriteCatResponse {
+  created_at: string;
+  id: number;
+  image: { id: string; url: string };
+  image_id: string;
+  sub_id: string;
+  user_id: string;
+}
+
 export interface CatDataState {
   breeds: {
     [key: string]: Breed;
   };
   randomBreed: { [key: string]: Breed };
+  allFavorites: favoriteCatResponse[][];
   randomBreedId: number;
   randomCat: Cat[];
   loading?: boolean;

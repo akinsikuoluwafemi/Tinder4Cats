@@ -1,15 +1,14 @@
 import { selectRandomCat } from '@/slices/catDataSlice';
-import { selectUser, authFavCat } from '@/slices/userSlice';
+import { selectUser } from '@/slices/userSlice';
 import { useEnvVars } from '@/utils/useEnvVars';
 import { User } from '@prisma/client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useCats from './useCats';
 
 const useFavorites = () => {
   const { callCat } = useCats();
-  const dispatch = useDispatch();
   const [token, setToken] = useState('');
   const { API_KEY } = useEnvVars();
   const cat = useSelector(selectRandomCat);

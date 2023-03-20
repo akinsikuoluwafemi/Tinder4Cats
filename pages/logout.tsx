@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { setUser } from '@/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { User } from '@prisma/client';
+import MainLayout from '@/layouts/mainLayout';
 
 const Logout = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Logout = () => {
     router.push('/login');
   }, [router]);
 
-  return null;
+  return <MainLayout>&nbsp;</MainLayout>;
 };
 
 export default Logout;

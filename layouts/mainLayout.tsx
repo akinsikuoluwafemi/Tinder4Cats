@@ -1,13 +1,12 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { MdLogin, MdLogout } from 'react-icons/md';
 import Link from 'next/link';
-import { Favorite } from '@/components/Icons';
+import { useRouter } from 'next/router';
 
-const Container = styled.section`
-  min-height: 100vh;
+const Container = styled.section<{ height: string }>`
+  height: ${({ height }) => height};
   width: 100%;
   background: white;
   margin: 0 auto;
@@ -21,6 +20,9 @@ const Container = styled.section`
 
 const Header = styled.header<{ show: boolean }>`
   // background: red;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #eee;
+
   width: 100%;
   height: 70px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -34,16 +36,18 @@ const Header = styled.header<{ show: boolean }>`
     justify-content: center;
     align-items: center;
     width: 100%;
+    // font-weight: 500;
 
     li:first-of-type {
-      font-size: 18px;
-      font-weight: 400;
+      // font-size: 18px;
+      // font-weight: 400;
       cursor: pointer;
     }
 
     li:last-of-type {
+      // font-weight: 500;
       font-size: 18px;
-      // color: green; //red
+      // color: green;
       cursor: pointer;
       padding-left: 20px;
     }
@@ -86,6 +90,11 @@ const MainLayout: NextPage<LayoutProps> = ({
 }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
+  const router = useRouter();
+  console.log(router.pathname);
+  const home = router.pathname === '/';
+  const favorite = router.pathname === '/favorites';
+
   useEffect(() => {
     const tokenStr =
       typeof window !== 'undefined' && localStorage.getItem('tokenstr');
@@ -104,7 +113,7 @@ const MainLayout: NextPage<LayoutProps> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container>
+      <Container height={home ? 'auto' : favorite ? 'auto' : '100vh'}>
         <Header show={showHeader}>
           <ul>
             <TextHeader>

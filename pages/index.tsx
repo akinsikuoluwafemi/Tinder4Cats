@@ -9,18 +9,14 @@ import MainLayout from '@/layouts/mainLayout';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLayout } from '@/slices/layoutSlice';
-import {
-  getCatBreed,
-  selectCatBreed,
-  setRandomBreed,
-  setRandomBreedId,
-} from '@/slices/catDataSlice';
+import { getCatBreed } from '@/slices/catDataSlice';
 import { useEnvVars } from '@/utils/useEnvVars';
-import { rand_breed } from '@/utils/randomBreed';
 
 const HomeSection = styled.section`
-  height: 100vh;
-  background: #f5f5f5;
+  overflow: hidden;
+
+  // height: 100vh;
+  background: #fff;
   padding: 20px 10px;
   display: flex;
   flex-direction: column;

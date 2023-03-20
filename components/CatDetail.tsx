@@ -3,13 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Cancel, Favorite, SuperLike } from './Icons';
-import {
-  selectRandomBreedId,
-  selectRandomBreed,
-  selectCatBreed,
-  selectRandomCat,
-  selectCatLoading,
-} from '@/slices/catDataSlice';
+import { selectRandomCat, selectCatLoading } from '@/slices/catDataSlice';
 import useCats from '@/hooks/useCats';
 import { LoadingIndicator } from '@/utils/styles';
 import useFavorites from '@/hooks/useFavorites';
@@ -20,6 +14,7 @@ const CatDetailWrapper = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const DetailPhoto = styled.div<{ bg: string }>`
@@ -104,21 +99,21 @@ const CatDetail = () => {
     <CatDetailWrapper>
       {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
       <DetailPhoto
-        bg={newCat[0].url}
+        bg={newCat[0]?.url}
         onClick={() => dispatch(toggleLayout())}
       />
 
       <DetailBio>
-        <span>{newCat[0].breeds[0].name}</span>
+        <span>{newCat[0]?.breeds[0].name}</span>
 
         <span>
           <span style={{ fontWeight: '400', fontSize: '17px' }}>
             Temperament
           </span>
-          : {newCat[0].breeds[0].temperament}
+          : {newCat[0]?.breeds[0].temperament}
         </span>
 
-        <span>Life Span: {newCat[0].breeds[0].life_span} years</span>
+        <span>Life Span: {newCat[0]?.breeds[0].life_span} years</span>
       </DetailBio>
 
       <DetailActionWrapper>

@@ -2,7 +2,7 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
 interface CustomApirequest extends NextApiRequest {
-  user: any;
+  user: jwt.JwtPayload | undefined | {};
 }
 
 const verifyToken = (
