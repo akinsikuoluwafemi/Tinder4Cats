@@ -12,7 +12,7 @@ export const persistConfig = {
   whitelist: ['catData', 'userData'],
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   layout: layoutReducer,
   catData: catDataReducer,
   userData: userReducer,
