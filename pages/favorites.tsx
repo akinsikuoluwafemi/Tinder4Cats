@@ -11,7 +11,7 @@ import { Favorite } from '@/components/Icons';
 
 const FavoriteContainer = styled.section`
   padding: 20px;
-  height: 100vh;
+  height: auto;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +45,13 @@ const FavoriteIcon = styled.span`
   display: flex;
 `;
 
+const Text = styled.h3`
+  margin-top: 3rem;
+  text-align: center;
+  margin: 0 auto;
+  color: #000;
+`;
+
 const Favorites = () => {
   const [allFavs, setAllFavs] = useState<favoriteCatResponse[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -64,7 +71,6 @@ const Favorites = () => {
           },
         },
       );
-      console.log(data);
       setAllFavs(data);
       setLoading(false);
       return data;
@@ -83,12 +89,15 @@ const Favorites = () => {
     } else {
       fetchFavorites();
     }
-  }, [router]);
+  }, []);
 
   return (
-    <MainLayout>
+    <MainLayout height={allFavs.length > 6 ? 'auto' : '100vh'}>
       <FavoriteContainer>
-        {loading && <p>Loading...</p>}
+        {allFavs.length === 0 && !loading && (
+          <Text>You have not Favorite Cat</Text>
+        )}
+        {loading && <Text>Loading...</Text>}
         {allFavs &&
           allFavs.map((fav) => {
             return (

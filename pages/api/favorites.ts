@@ -5,7 +5,7 @@ declare global {
 import prisma from '../../lib/prisma';
 
 import verifyToken from '@/middleware/verifyJWT';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface CustomApirequest extends NextApiRequest {
   user: any;

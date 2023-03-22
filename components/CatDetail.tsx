@@ -8,6 +8,7 @@ import useCats from '@/hooks/useCats';
 import { LoadingIndicator } from '@/utils/styles';
 import useFavorites from '@/hooks/useFavorites';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 
 const CatDetailWrapper = styled.section`
   background: white;
@@ -142,9 +143,17 @@ const CatDetail = () => {
                 addToFavorites();
                 dispatch(toggleLayout());
               } else {
-                alert('Please login to add to favorites');
-                router.push('/login');
-                dispatch(toggleLayout());
+                let timer: any;
+                toast.info('Please login to add to favorites', {
+                  position: 'top-center',
+                  pauseOnHover: true,
+                  autoClose: 4000,
+                });
+                timer = setTimeout(() => {
+                  dispatch(toggleLayout());
+                  router.push('/login');
+                }, 2000);
+                return () => clearTimeout(timer);
               }
             }}
           >
@@ -152,6 +161,7 @@ const CatDetail = () => {
           </span>
         </ActionDetailWrapper>
       </DetailActionWrapper>
+      <ToastContainer />
     </CatDetailWrapper>
   );
 };

@@ -47,74 +47,6 @@ export const loginUser = createAsyncThunk(
   },
 );
 
-export const authFavCat = createAsyncThunk(
-  'userData/authFavCat',
-  async (user: any, thunkAPI: any) => {
-    try {
-      const { token } = thunkAPI.getState()?.userData;
-      console.log(token);
-
-      const response = await axios.post(
-        'api/favorites/',
-        {
-          userId: user.id,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      console.log('good');
-      console.log(response);
-      return response;
-
-      // const { data } = await axios.post(
-      //   '/api/favorites/',
-      //   {
-      //     userId: user.userId,
-      //     token: user.token,
-      //     // apikey: user.apikey,
-      //     // image_id: user.image_id,
-      //     // sub_id: user.userId,
-      //   },
-      //   {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       Authorization: `Bearer ${user.token}`,
-      //       // 'x-api-key': `${user.apikey}`,
-      //     },
-      //   },
-      // );
-      // console.log(data);
-
-      // return data;
-
-      //  // like here
-      //  const apikey = req.headers['x-api-key'];
-      //  console.log(apikey);
-
-      //  const { data } = await axios.post(
-      //    'https://api.thecatapi.com/v1/favourites',
-      //    {
-      //      image_id,
-      //      sub_id,
-      //    },
-      //    {
-      //      headers: {
-      //        'x-api-key': apikey,
-      //      },
-      //    },
-      //  );
-    } catch (err: any) {
-      console.log(err);
-      return thunkAPI.rejectWithValue({ error: err.message });
-    }
-  },
-);
-
 const userDataSlice = createSlice({
   name: 'userData',
   initialState,
@@ -157,19 +89,6 @@ const userDataSlice = createSlice({
       state.error = action.payload as { message: ''; success: false };
     });
     builder.addCase(loginUser.pending, (state, action) => {
-      state.loading = true;
-    });
-
-    builder.addCase(authFavCat.fulfilled, (state: any, action) => {
-      state.loading = false;
-      state.error = null;
-      state.user = action.payload;
-    });
-    builder.addCase(authFavCat.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload as { message: ''; success: false };
-    });
-    builder.addCase(authFavCat.pending, (state, action) => {
       state.loading = true;
     });
   },

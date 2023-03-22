@@ -2,15 +2,14 @@ import MainLayout from '@/layouts/mainLayout';
 import React, { Dispatch, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import styled from 'styled-components';
 import { UserSubmitForm } from '@/types/globalTypes';
 import { validationSchema } from '@/utils/validators';
-import TextField from '@/components/TextField';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { registerUser } from '@/slices/userSlice';
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 const FormTitle = styled.h1`
   text-align: center;
@@ -114,13 +113,28 @@ const Signup = () => {
       };
 
       const response = await dispatch(registerUser(user) as any);
+      console.log(response);
       if (response.payload.success === true) {
-        alert(response.payload.message);
+        toast.success(response.payload.message, {
+          position: 'top-center',
+          pauseOnHover: true,
+          autoClose: 4000,
+        });
         router.push('/login');
+      } else {
+        toast.error(response.error.message, {
+          position: 'top-center',
+          pauseOnHover: true,
+          autoClose: 4000,
+        });
       }
     } catch (err: any) {
-      alert(err.message);
       console.log(err);
+      toast.error(err.message, {
+        position: 'top-center',
+        pauseOnHover: true,
+        autoClose: 4000,
+      });
     }
 
     reset();
@@ -156,6 +170,7 @@ const Signup = () => {
           <Link href="/login">Already have an account? Login</Link>
         </SmallText>
       </Form>
+      <ToastContainer />
     </MainLayout>
   );
 };

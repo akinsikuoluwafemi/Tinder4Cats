@@ -81,12 +81,14 @@ type LayoutProps = {
   children: React.ReactNode;
   title?: string;
   showHeader?: boolean;
+  height?: string;
 };
 
 const MainLayout: NextPage<LayoutProps> = ({
   children,
   title = 'Tinder for cats',
   showHeader = true,
+  height = '100vh',
 }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
@@ -113,16 +115,18 @@ const MainLayout: NextPage<LayoutProps> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container height={home ? 'auto' : favorite ? 'auto' : '100vh'}>
+      <Container height={height}>
         <Header show={showHeader}>
           <ul>
             <TextHeader>
               <Link href="/">Tinder for Cats</Link>
             </TextHeader>
 
-            <li>
-              <Link href="/favorites">Favorites</Link>
-            </li>
+            {loggedIn && (
+              <li>
+                <Link href="/favorites">Favorites</Link>
+              </li>
+            )}
 
             {loggedIn ? (
               <li>

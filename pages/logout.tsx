@@ -14,7 +14,7 @@ const Logout = () => {
     localStorage.removeItem('user');
     dispatch(setUser({} as User));
     router.push('/login');
-  }, [router]);
+  });
 
   return <MainLayout>&nbsp;</MainLayout>;
 };

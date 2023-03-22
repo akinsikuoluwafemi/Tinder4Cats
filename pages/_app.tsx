@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from 'next/app';
 import { store, persistor } from '../store';
 import { Provider } from 'react-redux';

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { loginUser, setToken, setUser } from '@/slices/userSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 const FormTitle = styled.h1`
   text-align: center;
@@ -119,18 +120,29 @@ const Login = () => {
           JSON.stringify(response.payload.token),
         );
 
+        toast.success(response.payload.message, {
+          position: 'top-center',
+          pauseOnHover: true,
+          autoClose: 4000,
+        });
+
         dispatch(setToken(response.payload.token));
-
         dispatch(setUser(response.payload.user));
-
-        alert(response.payload.message);
         router.push('/');
+      } else {
+        toast.error(response.error.message, {
+          position: 'top-center',
+          pauseOnHover: true,
+          autoClose: 4000,
+        });
       }
     } catch (err: any) {
-      console.log(err);
-      alert(err.message);
+      toast.error(err.message, {
+        position: 'top-center',
+        pauseOnHover: true,
+        autoClose: 4000,
+      });
     }
-
     reset();
   };
 
@@ -156,6 +168,7 @@ const Login = () => {
           <Link href="/signup">Do not have have an account? Signup</Link>
         </SmallText>
       </Form>
+      <ToastContainer />
     </MainLayout>
   );
 };
