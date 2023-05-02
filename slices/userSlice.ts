@@ -19,9 +19,10 @@ const initialState: UserDataState = {
 export const registerUser = createAsyncThunk(
   'userData/registerUser',
   async (user: UserSubmitForm, thunkAPI) => {
-    const url = process.env.development
-      ? `/api/signup/`
-      : `${process.env['NEXT_PUBLIC_API_ENDPOINT_PROD']}/signup/`;
+    const url =
+      process.env.NODE_ENV === 'development'
+        ? `/api/signup/`
+        : `${process.env['NEXT_PUBLIC_API_ENDPOINT_PROD']}/api/signup/`;
     try {
       const { data } = await axios.post(url, {
         email: user.email,
@@ -38,11 +39,12 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'userData/loginUser',
   async (user: UserSubmitForm, thunkAPI) => {
-    const url = process.env.development
-      ? `/api/login/`
-      : `${process.env['NEXT_PUBLIC_API_ENDPOINT_PROD']}/api/login/`;
+    const url =
+      process.env.NODE_ENV === 'development'
+        ? `/api/login/`
+        : `${process.env['NEXT_PUBLIC_API_ENDPOINT_PROD']}/api/login/`;
     try {
-      const { data } = await axios.post(url, {
+      const { data } = await axios.post('/api/login/', {
         email: user.email,
         password: user.password,
       });

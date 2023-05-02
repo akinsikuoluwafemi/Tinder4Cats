@@ -32,6 +32,10 @@ const FavoriteCard = styled.div<{ bg: string }>`
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 426px) {
+    width: 100%;
+  }
 `;
 
 const FavoriteIcon = styled.span`

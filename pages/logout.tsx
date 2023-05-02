@@ -16,7 +16,7 @@ const Logout = () => {
     router.push('/login');
   });
 
-  return <MainLayout>&nbsp;</MainLayout>;
+  return <MainLayout height="100vh">&nbsp;</MainLayout>;
 };
 
 export default Logout;
