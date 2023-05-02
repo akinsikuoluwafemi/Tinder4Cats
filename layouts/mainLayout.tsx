@@ -88,7 +88,7 @@ const MainLayout: NextPage<LayoutProps> = ({
   children,
   title = 'Tinder for cats',
   showHeader = true,
-  height = '100vh',
+  height = 'auto',
 }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 

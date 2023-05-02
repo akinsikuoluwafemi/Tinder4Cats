@@ -24,6 +24,18 @@ const favoriteHandler = async (req: CustomApirequest, res: NextApiResponse) => {
             .status(401)
             .json({ message: 'Unauthorized', success: false });
         } else {
+          // pass the image_id from the body req.body.image_id to create favorite in prisma
+          // await prisma.favorite.create({
+          //   data: {
+          //     user: {
+          //       connect: {
+          //         id: userId,
+          //       },
+          //     },
+          //     image_id: '',
+          //     userId,
+          //   },
+          // });
           res.json({ message: 'Authorized', success: true });
         }
       } catch (err: any) {
