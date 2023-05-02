@@ -11,6 +11,12 @@ import { useRouter } from 'next/router';
 import { loginUser, setToken, setUser } from '@/slices/userSlice';
 import { ToastContainer, toast } from 'react-toastify';
 
+// {
+//   "email": "akinsiku.o@yahoo.com",
+//   "password": "femiakinsiku"
+
+// }
+
 const FormTitle = styled.h1`
   text-align: center;
   // margin-bottom: 20px;

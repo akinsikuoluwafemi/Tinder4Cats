@@ -12,21 +12,21 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CatDetailWrapper = styled.section`
   background: white;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  // overflow: hidden;
 `;
 
 const DetailPhoto = styled.div<{ bg: string }>`
   background-image: url(${({ bg }) => bg});
   background-size: cover;
   background-position: top center;
-  height: 480px;
+  min-height: 480px;
   // background: red;
   background-repeat: no-repeat;
   width: 100%;
-  flex: 0.7;
+  flex: 0.6;
   cursor: pointer;
 `;
 

@@ -18,6 +18,7 @@ const FavoriteContainer = styled.section`
   gap: 20px;
   justify-content: start;
   align-items: start;
+  background: white;
 `;
 
 const FavoriteCard = styled.div<{ bg: string }>`
@@ -72,7 +73,6 @@ const Favorites = () => {
         },
       );
       setAllFavs(data);
-      setLoading(false);
       return data;
     } catch (err: any) {
       console.log(err);
