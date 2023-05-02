@@ -141,7 +141,7 @@ const Signup = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout height="100vh">
       <FormTitle>Signup</FormTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="username">Username</label>

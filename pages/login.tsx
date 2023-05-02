@@ -153,7 +153,7 @@ const Login = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout height="100vh">
       <FormTitle>Login</FormTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email">Email</label>
