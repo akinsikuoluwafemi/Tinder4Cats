@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const Container = styled.section<{ height: string }>`
   height: ${({ height }) => height};
@@ -51,6 +50,11 @@ const Header = styled.header<{ show: boolean }>`
       cursor: pointer;
       padding-left: 20px;
     }
+
+    li {
+      font-weight: 500;
+      color: #444;
+    }
   }
 `;
 
@@ -92,11 +96,6 @@ const MainLayout: NextPage<LayoutProps> = ({
 }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  const router = useRouter();
-  console.log(router.pathname);
-  const home = router.pathname === '/';
-  const favorite = router.pathname === '/favorites';
-
   useEffect(() => {
     const tokenStr =
       typeof window !== 'undefined' && localStorage.getItem('tokenstr');
@@ -110,9 +109,14 @@ const MainLayout: NextPage<LayoutProps> = ({
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content="Tinder For Cats" />
+        <meta
+          name="description"
+          content="Tinder For Cats - Find your purrfect match today!"
+        />
+        <meta name="keywords" content="cats, dating, love, match, purrfect" />
+        <meta name="author" content="Femi Akinsiku" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/cat.png" />
       </Head>
 
       <Container height={height}>

@@ -96,7 +96,10 @@ const Favorites = () => {
   }, []);
 
   return (
-    <MainLayout height={allFavs.length > 6 ? 'auto' : '100vh'}>
+    <MainLayout
+      title="Tinder for cats - Favorites"
+      height={allFavs.length > 6 ? 'auto' : '100vh'}
+    >
       <FavoriteContainer>
         {allFavs.length === 0 && !loading && (
           <Text>You have not Favorite Cat</Text>

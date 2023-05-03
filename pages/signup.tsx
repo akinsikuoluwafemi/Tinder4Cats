@@ -1,5 +1,5 @@
 import MainLayout from '@/layouts/mainLayout';
-import React, { Dispatch, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
@@ -141,7 +141,7 @@ const Signup = () => {
   };
 
   return (
-    <MainLayout height="100vh">
+    <MainLayout title="Tinder for cats - Signup" height="100vh">
       <FormTitle>Signup</FormTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="username">Username</label>

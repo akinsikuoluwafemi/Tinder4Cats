@@ -1,12 +1,7 @@
 import { Cat } from './../types/globalTypes';
 import { RootState } from '../store';
 import { Breed, CatDataState } from '../types/globalTypes';
-import {
-  AsyncThunkAction,
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState: CatDataState = {

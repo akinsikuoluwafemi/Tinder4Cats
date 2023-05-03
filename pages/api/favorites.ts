@@ -2,8 +2,6 @@ declare global {
   var globalThis: any;
 }
 
-import prisma from '../../lib/prisma';
-
 import verifyToken from '@/middleware/verifyJWT';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -16,7 +14,6 @@ const favoriteHandler = async (req: CustomApirequest, res: NextApiResponse) => {
     verifyToken(req, res, async () => {
       try {
         const { userId } = req.body;
-        console.log('req.body', req.body);
         const user = req.user;
 
         if (user.id !== userId) {

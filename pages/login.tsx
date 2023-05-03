@@ -153,7 +153,7 @@ const Login = () => {
   };
 
   return (
-    <MainLayout height="100vh">
+    <MainLayout title="Tinder for cats - Login" height="100vh">
       <FormTitle>Login</FormTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email">Email</label>

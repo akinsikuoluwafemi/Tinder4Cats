@@ -41,6 +41,7 @@ const CatImg = styled.img<{ bg: string }>`
   background-size: cover;
   background-position: top center;
   border-top-left-radius: 20px;
+  outline: none;
   border-top-right-radius: 20px;
   // transform: translateX(-50%);
   // transform: translate3d(200%, -50%, 0) rotate(45deg);
@@ -56,9 +57,8 @@ const CatBio = styled.div`
   border-bottom-left-radius: 20px;
   color: #000;
   padding: 20px 10px;
+  outline: none;
 `;
-
-const CatCaption = styled.figcaption``;
 
 const CatsName = styled.span`
   font-size: 30px;

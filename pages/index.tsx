@@ -1,16 +1,14 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '@/styles/Home.module.css';
 import styled from 'styled-components';
 import CatProfile from '@/components/CatProfile';
 import CallToAction from '@/components/CallToAction';
 import CatDetail from '@/components/CatDetail';
 import MainLayout from '@/layouts/mainLayout';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLayout } from '@/slices/layoutSlice';
 import { getCatBreed } from '@/slices/catDataSlice';
 import { useEnvVars } from '@/utils/useEnvVars';
+import useCats from '@/hooks/useCats';
 
 const HomeSection = styled.section`
   overflow: hidden;
@@ -27,6 +25,7 @@ const HomeSection = styled.section`
 
 export default function Home() {
   const { API_ENDPOINT } = useEnvVars();
+  const { callCat } = useCats();
   const dispatch = useDispatch();
 
   const fetchBreeds = useCallback(() => {
@@ -34,7 +33,8 @@ export default function Home() {
   }, [API_ENDPOINT, dispatch]);
   useEffect(() => {
     fetchBreeds();
-  }, [fetchBreeds]);
+    callCat();
+  }, []);
 
   const isLayoutUsed = useSelector(selectLayout);
 
