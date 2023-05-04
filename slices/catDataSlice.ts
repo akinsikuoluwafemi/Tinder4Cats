@@ -5,7 +5,16 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState: CatDataState = {
-  breeds: {},
+  breeds: {
+    abys: {
+      id: 'abys',
+      name: 'Abyssinian',
+      description:
+        'The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and love both people and other animals.',
+      origin: 'Egypt',
+      temperament: 'Active, Energetic, Independent, Intelligent, Gentle',
+    },
+  },
   randomBreed: {},
   randomBreedId: 5,
   randomCat: [],

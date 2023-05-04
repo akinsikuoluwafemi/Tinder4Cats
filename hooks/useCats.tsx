@@ -12,11 +12,14 @@ const useCats = () => {
   const { API_ENDPOINT, API_KEY } = useEnvVars();
 
   const catBreed = useSelector(selectCatBreed);
+  console.log(catBreed);
   const dispatch = useDispatch();
 
   const callCat = () => {
     const randomCatBreedId = rand_breed(catBreed);
-    const breed_id: string = Object.values(catBreed[randomCatBreedId])[0].id;
+    const breed_id: string =
+      Object.values(catBreed[randomCatBreedId])[0].id || 'abys';
+    console.log(breed_id);
     dispatch(setRandomBreedId(randomCatBreedId));
     const randomCatBreed = catBreed[randomCatBreedId];
     catBreed && dispatch(setRandomBreed(randomCatBreed));
